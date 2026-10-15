@@ -49,11 +49,11 @@
 
 ```powershell
 cd backend
-$env:DB_URL="jdbc:postgresql://aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres?sslmode=require"
-$env:DB_USERNAME="postgres.your-project-ref"
-$env:DB_PASSWORD="your-database-password"
-.\gradlew.bat bootRun
+copy .env.example .env      # DB_URL / DB_USERNAME / DB_PASSWORD 값 입력
+powershell -ExecutionPolicy Bypass -File .\run-local.ps1
 ```
+
+`run-local.ps1`은 `backend/.env`를 읽어 환경변수로 설정하고, `JAVA_HOME`이 없으면 `~/.jdks`의 JDK 17을 찾아 `gradlew.bat bootRun`을 실행합니다.
 
 macOS/Linux는 `export DB_URL=...` 후 `./gradlew bootRun`.
 IntelliJ에서는 Run Configuration → Environment variables에 같은 값을 넣으면 됩니다.
